@@ -1,0 +1,25 @@
+{
+	"name": "final-project-classification-history",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.3",
+		"@sveltejs/kit": "^1.5.0",
+		"chart.js": "^4.4.9",
+		"d3": "^7.9.0",
+		"svelte": "^4.2.20",
+		"svelte-chartjs": "^3.1.5",
+		"svelte-scrolly": "^0.0.4",
+		"vite": "^4.3.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"d3-scale": "^4.0.2"
+	}
+}
