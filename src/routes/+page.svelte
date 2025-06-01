@@ -1,11 +1,11 @@
 <script>
     import { loadData } from "$lib/data/loadData.js";
-    import Center from "$lib/layout/Center.svelte";
     import Section from "$lib/layout/Section.svelte";
     import Step from "$lib/scrolly/Step.svelte";
     import { onMount } from "svelte";
     import Scrolly from "svelte-scrolly";
     import ScatterPlot from "../lib/charts/ScatterPlot.svelte";
+    import Drawer from "$lib/Drawer.svelte";
 
     let data = null;
     onMount(async () => {
@@ -19,6 +19,9 @@
         {"sufix": "line"},
         {"sufix": "xor"},
     ];
+
+    let pixelMatrix;
+    $: console.log("pixelMatrix", pixelMatrix);
 
 </script>
 
@@ -54,6 +57,9 @@
             />
         </svelte:fragment>
 	</Scrolly>
+    <div class="slide">
+        <Drawer bind:pixelMatrix/>
+    </div>
 </Section>
 
 <style>
@@ -74,5 +80,10 @@
         text-align: justify;
         margin-bottom: 10px;
         font-size: 20px;
+    }
+
+    .slide {
+        width: 100%;
+        height: 100vh;
     }
 </style>
