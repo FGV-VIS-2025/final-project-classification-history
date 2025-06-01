@@ -1,11 +1,13 @@
 <script>
+    import MnistImages from "$lib/charts/MnistImages.svelte";
     import { loadData } from "$lib/data/loadData.js";
+    import Drawer from "$lib/Drawer.svelte";
     import Section from "$lib/layout/Section.svelte";
+    import Slide from "$lib/layout/Slide.svelte";
     import Step from "$lib/scrolly/Step.svelte";
     import { onMount } from "svelte";
     import Scrolly from "svelte-scrolly";
     import ScatterPlot from "../lib/charts/ScatterPlot.svelte";
-    import Drawer from "$lib/Drawer.svelte";
 
     let data = null;
     onMount(async () => {
@@ -21,7 +23,6 @@
     ];
 
     let pixelMatrix;
-    $: console.log("pixelMatrix", pixelMatrix);
 
 </script>
 
@@ -57,9 +58,24 @@
             />
         </svelte:fragment>
 	</Scrolly>
-    <div class="slide">
+
+    <!--MNIST-->
+    <Slide>
+        <div class="text">
+            <h1>MNIST</h1>
+            <p>
+                The MNIST dataset is a collection of handwritten digits that is widely used in the field of machine learning. It contains 60,000 training images and 10,000 test images, each of which is a grayscale image of a handwritten digit (0-9) with a size of 28x28 pixels. The dataset was created by Yann LeCun and his colleagues in 1998 and has since become a benchmark for evaluating the performance of machine learning algorithms.
+            </p>
+        </div>
+        <div class="picture">
+            <MnistImages/>
+        </div>
+    </Slide>
+
+    <!--Trained CNN-->
+    <Slide>
         <Drawer bind:pixelMatrix/>
-    </div>
+    </Slide>
 </Section>
 
 <style>
@@ -82,8 +98,16 @@
         font-size: 20px;
     }
 
-    .slide {
-        width: 100%;
-        height: 100vh;
+    .text {
+        width: 25%;
     }
+
+    .picture {
+        width: 75%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 </style>
