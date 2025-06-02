@@ -7,7 +7,8 @@
     import Step from "$lib/scrolly/Step.svelte";
     import { onMount } from "svelte";
     import Scrolly from "svelte-scrolly";
-    import ScatterPlot from "../lib/charts/ScatterPlot.svelte";
+    import ScatterPlot from "$lib/charts/ScatterPlot.svelte";
+    import History from "$lib/slides/History.svelte";
 
     let data = null;
     onMount(async () => {
@@ -76,6 +77,19 @@
     <Slide>
         <Drawer bind:pixelMatrix/>
     </Slide>
+
+    <Slide>
+        <div class="text">
+            <h1>History</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit tempora rem necessitatibus deleniti quibusdam omnis, magni minima natus debitis consectetur voluptatum. Blanditiis, odio maxime laudantium in doloremque eius ipsa inventore?
+            </p>
+        </div>
+        <div class="picture">
+            <History/>
+        </div>
+    </Slide>
+    
 </Section>
 
 <style>
