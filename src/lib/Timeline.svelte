@@ -1,166 +1,165 @@
 <script>
-    import { onMount } from "svelte";
-    import * as d3 from "d3";
-    import data from "../data/models_timeline.json";
-  
-    let container;
-  
-    onMount(() => {
-      const margin = { top: 20, right: 20, bottom: 40, left: 100 };
-      const width = container.clientWidth - margin.left - margin.right;
-      const height = 400 - margin.top - margin.bottom;
-  
-      const parseDate = d3.timeParse("%Y-%m-%d");
-      data.forEach(d => {
-        d.parsedDate = parseDate(d.date);
-      });
-  
-      const categories = Array.from(new Set(data.map(d => d.category)));
-  
-      const yScale = d3
-        .scaleBand()
-        .domain(categories)
-        .range([0, height])
-        .padding(0.3);
-  
-      const minDate = d3.min(data, d => d.parsedDate);
-      const maxDate = d3.max(data, d => d.parsedDate);
-      const xScale = d3
-        .scaleTime()
-        .domain([d3.timeYear.offset(minDate, -1), d3.timeYear.offset(maxDate, 1)])
-        .range([0, width]);
-  
-      const svg = d3
-        .select(container)
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
-  
-      const xAxis = d3
-        .axisBottom(xScale)
-        .ticks(d3.timeYear.every(2))
-        .tickFormat(d3.timeFormat("%Y"));
-      svg
-        .append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(xAxis)
-        .selectAll("text")
-        .attr("transform", "rotate(-45)")
-        .style("text-anchor", "end");
-  
-      const yAxis = d3.axisLeft(yScale);
-      svg.append("g").call(yAxis);
-  
-      const tooltip = d3
-        .select("body")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-  
-      svg
-        .selectAll("circle")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("cx", d => xScale(d.parsedDate))
-        .attr("cy", d => yScale(d.category) + yScale.bandwidth() / 2)
-        .attr("r", 8)
-        .attr("fill", d => {
-          const palette = d3.schemeTableau10;
-          const idx = categories.indexOf(d.category);
-          return palette[idx % palette.length];
-        })
-        .on("mouseover", (event, d) => {
-          tooltip
-            .transition()
-            .duration(200)
-            .style("opacity", 0.95);
-  
-          tooltip
-            .html(`
-              <div class="tooltip-card">
-                <h4>${d.name} (${d.date.slice(0, 4)})</h4>
-                <p><strong>Autores:</strong> ${d.authors}</p>
-                <p>${d.description}</p>
-                ${d.paper ? `<p><a href="${d.paper}" target="_blank">Ler Paper</a></p>` : ""}
-              </div>
-            `)
-            .style("left", event.pageX + 15 + "px")
-            .style("top", event.pageY - 28 + "px");
-        });
-  
-      svg
-        .selectAll("text.label")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "label")
-        .attr("x", d => xScale(d.parsedDate))
-        .attr("y", d => yScale(d.category) + yScale.bandwidth() / 2 - 12)
-        .attr("text-anchor", "middle")
-        .attr("font-size", "10px")
-        .text(d => d.name);
-  
-      d3.select("body").on("click", (event) => {
-        const target = event.target;
-        if (
-          target.tagName.toLowerCase() !== "circle" &&
-          !target.closest(".tooltip-card")
-        ) {
-          tooltip
-            .transition()
-            .duration(200)
-            .style("opacity", 0);
-        }
-      });
+  import { createEventDispatcher, onMount } from "svelte";
+  import * as d3 from "d3";
+  import data from "../data/models_timeline.json";
+
+  const filenameMap = {
+    "Support Vector Machine":      "svm_arch.png",
+    "Random Forest":               "rf_arch.png",
+    "Gradient Boosting Machine":   "gbm_arch.png",
+    "AlexNet":                     "alexnet_arch.png",
+    "VGG":                         "vgg_arch.png",
+    "ResNet":                      "resnet_arch.png",
+    "XGBoost":                     "xgboost_arch.png",
+    "BERT":                        "bert_arch.png",
+    "ViT":                         "vit_arch.png",
+    "Swin Transformer":            "swin_arch.png"
+  };
+
+  const dispatch = createEventDispatcher();
+  let container;
+
+  let categories = [];
+  let colorScale;
+
+  onMount(() => {
+    const parseDate = d3.timeParse("%Y-%m-%d");
+    data.forEach(d => {
+      d.parsedDate = parseDate(d.date);
+      d.imgPath = `/architectures/${filenameMap[d.name] || "not_found.png"}`;
+      d.year = d.date.slice(0, 4);
     });
-  </script>
-  
-  <style>
-    :global(div#timeline-container) {
-      width: 100%;
-    }
-  
-    :global(.tooltip) {
-      position: absolute;
-      pointer-events: none;
-      background: #ffffffcc;
-      border: 1px solid #999;
-      border-radius: 4px;
-      padding: 8px;
-      font-size: 12px;
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-      max-width: 220px;
-      line-height: 1.3;
-      color: #333;
-      z-index: 10;
-    }
-  
-    .tooltip-card {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .tooltip-card h4 {
-      margin: 0 0 4px 0;
-      font-size: 14px;
-    }
-  
-    .tooltip-card p {
-      margin: 2px 0;
-    }
-  
-    .tooltip-card a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-  
-    .tooltip-card a:hover {
-      text-decoration: underline;
-    }
-  </style>
-  
-  <div id="timeline-container" bind:this={container}></div>
-  
+
+    categories = Array.from(new Set(data.map(d => d.category)));
+    colorScale = d3.scaleOrdinal(d3.schemeTableau10).domain(categories);
+
+    drawTimeline();
+  });
+
+  function drawTimeline() {
+    d3.select(container).selectAll("*").remove();
+
+    const margin = { top: 40, bottom: 20 };
+    const width = container.clientWidth;
+    const height = container.clientHeight - margin.top - margin.bottom;
+
+    const svg = d3
+      .select(container)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${width / 2},${margin.top})`);
+
+    const minDate = d3.min(data, d => d.parsedDate);
+    const maxDate = d3.max(data, d => d.parsedDate);
+    const yScale = d3
+      .scaleTime()
+      .domain([minDate, maxDate])
+      .range([height, 0]);
+
+    svg
+      .append("line")
+      .attr("x1", 0).attr("x2", 0)
+      .attr("y1", 0).attr("y2", height)
+      .attr("stroke", "#ccc")
+      .attr("stroke-width", 2);
+
+    svg
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", 0)
+      .attr("cy", d => yScale(d.parsedDate))
+      .attr("r", 8)
+      .attr("fill", d => colorScale(d.category))
+      .style("cursor", "pointer")
+      .on("mouseover", (event, d) => {
+        dispatch("hover", d);
+      })
+      .on("mouseout", () => {
+        dispatch("hover", null);
+      })
+      .on("click", (event, d) => {
+        event.stopPropagation();
+        dispatch("select", d);
+      });
+
+    svg
+      .selectAll("text.model-label")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("class", "model-label")
+      .attr("x", 12)
+      .attr("y", d => yScale(d.parsedDate) + 4)
+      .text(d => `${d.name} (${d.year})`)
+      .attr("font-size", "10px")
+      .attr("fill", "#333")
+      .style("user-select", "none");
+  }
+</script>
+
+<style>
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .timeline-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.legend) {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    z-index: 10;
+  }
+
+  :global(.legend-item) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  :global(.legend-item:last-child) {
+    margin-bottom: 0;
+  }
+
+  :global(.legend-color) {
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    border: 1px solid #999;
+  }
+  .model-label {
+    pointer-events: none;
+  }
+</style>
+
+<div class="wrapper">
+  <div class="timeline-container" bind:this={container}></div>
+
+  <div class="legend">
+    {#if categories.length && colorScale}
+      {#each categories as cat}
+        <div class="legend-item">
+          <span
+            class="legend-color"
+            style="background-color: {colorScale(cat)}"
+          ></span>
+          <span>{cat}</span>
+        </div>
+      {/each}
+    {/if}
+  </div>
+</div>
