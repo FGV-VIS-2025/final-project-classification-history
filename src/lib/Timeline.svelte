@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher, onMount } from "svelte";
     import * as d3 from "d3";
-    import data from "../data/models_timeline.json";
+    import { base } from "$app/paths";
   
     const filenameMap = {
       "Support Vector Machine":    "svm_arch.png",
@@ -18,15 +18,18 @@
   
     const dispatch = createEventDispatcher();
     let container;
-  
+    
+    let data = [];
     let categories = [];
     let colorScale;
   
-    onMount(() => {
+    onMount(async () => {
       const parseDate = d3.timeParse("%Y-%m-%d");
+      data = await d3.json(`${base}/data/models_timeline.json`);
+      console.log(data)
       data.forEach(d => {
         d.parsedDate = parseDate(d.date);
-        d.imgPath    = `/architectures/${filenameMap[d.name] || "not_found.png"}`;
+        d.imgPath    = `${base}/architectures/${filenameMap[d.name] || "not_found.png"}`;
         d.year       = d.date.slice(0, 4);
       });
   
