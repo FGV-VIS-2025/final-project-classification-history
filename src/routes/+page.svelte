@@ -123,12 +123,12 @@
         <div class="text">
             <h1>Notable AI Models</h1>
             <p>
-                Este gráfico mostra a evolução do esforço computacional (em FLOPs) necessário para treinar modelos de IA ao longo do tempo. 
-                O eixo X representa o ano de publicação de cada modelo e o eixo Y (escala logarítmica) exibe o número de FLOPs.
+                This graph shows the evolution of the computational effort (in FLOPs) required to train AI models over time.
+                The X-axis represents the year each model was published, and the Y-axis (log scale) displays the number of FLOPs.
             </p>
             <p>
-                A região sombreada marca a “Deep Learning Era” (a partir de 2010), quando houve um aumento expressivo no uso de computação para treinar redes neurais. 
-                Ao passar o mouse sobre cada ponto, aparece um tooltip próximo ao cursor mostrando o nome do modelo, o ano e a quantidade de FLOPs.
+                The shaded region marks the “Deep Learning Era” (from 2010 onwards), when there was a significant increase in the use of computing to train neural networks.
+                When you hover over each point, a tooltip appears near the cursor showing the model name, year and number of FLOPs.
             </p>
         </div>
         <div class="picture">
