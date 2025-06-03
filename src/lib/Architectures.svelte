@@ -1,9 +1,4 @@
 <script>
-    /**
-     * Este componente simplesmente mostra:
-     * - Se `model === null`: placeholder "Hover over models"
-     * - Se `model` existe: nome, imagem da arquitetura, autores, descrição e link para o paper
-     */
     export let model = null;
   </script>
   
@@ -14,6 +9,9 @@
       border: 2px dashed #aaa;
       border-radius: 8px;
       background: #f5f5f5;
+  
+      overflow: hidden;
+  
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -24,7 +22,8 @@
     }
   
     .center-box img {
-      max-width: 80%;
+      max-width: 100%;
+      max-height: 100%;
       height: auto;
       margin: 1rem 0;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -82,3 +81,4 @@
       <p class="placeholder-text">Hover over models</p>
     {/if}
   </div>
+  
