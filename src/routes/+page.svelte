@@ -8,6 +8,8 @@
     import { onMount } from "svelte";
     import Scrolly from "svelte-scrolly";
     import ScatterPlot from "../lib/charts/ScatterPlot.svelte";
+    import CNNExplorer   from "$lib/charts/CNNExplorer.svelte";
+    import CNNExplorerPretty from "$lib/charts/CNNExplorerPretty.svelte";
 
     let data = null;
     onMount(async () => {
@@ -75,6 +77,7 @@
     <!--Trained CNN-->
     <Slide>
         <Drawer bind:pixelMatrix/>
+        <CNNExplorer />   
     </Slide>
 </Section>
 
@@ -108,6 +111,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .cnn-wrapper {
+        display: flex;
+        flex: 1 1 100%;
+        gap: 24px;            /* space between Drawer and CNNExplorer */
+        align-items: flex-start;
+        height: 100%;         /* keeps both widgets full-height inside Slide */
     }
 
 </style>
