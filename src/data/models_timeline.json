@@ -1,0 +1,93 @@
+[
+    {
+      "date": "1992-01-01",
+      "name": "Support Vector Machine",
+      "category": "Linear/Kernels",
+      "authors": "Cortes & Vapnik (1995)",
+      "description": "Margem máxima para classificação binária; introdução ao kernel trick.",
+      "paper": "https://www.csie.ntu.edu.tw/~cjlin/papers/cone_filter.pdf",
+      "img": "svm_icon.png"
+    },
+    {
+      "date": "2001-01-01",
+      "name": "Random Forest",
+      "category": "Ensemble",
+      "authors": "Breiman (2001)",
+      "description": "Bagging de árvores de decisão com seleção aleatória de features.",
+      "paper": "https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf",
+      "img": "rf_icon.png"
+    },
+    {
+      "date": "2005-01-01",
+      "name": "Gradient Boosting Machine",
+      "category": "Ensemble",
+      "authors": "Friedman (2001)",
+      "description": "Árvores sequenciais ajustadas para corrigir erros residuais cumulativos.",
+      "paper": "https://statweb.stanford.edu/~jhf/ftp/trebst.pdf",
+      "img": "gbm_icon.png"
+    },
+    {
+      "date": "2012-01-01",
+      "name": "AlexNet",
+      "category": "Deep Learning",
+      "authors": "Krizhevsky, Sutskever & Hinton (2012)",
+      "description": "CNN profunda que revolucionou visão computacional no ImageNet.",
+      "paper": "http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf",
+      "img": "alexnet_icon.png"
+    },
+    {
+      "date": "2014-09-04",
+      "name": "VGG",
+      "category": "Deep Learning",
+      "authors": "Szegedy et al. (2014)",
+      "description": "Redes mais profundas (16–19 camadas) com pequenos filtros 3×3.",
+      "paper": "https://arxiv.org/pdf/1409.1556.pdf",
+      "img": "vgg_icon.png"
+    },
+    {
+      "date": "2015-10-27",
+      "name": "ResNet",
+      "category": "Deep Learning",
+      "authors": "He et al. (2015)",
+      "description": "Blocos residuais que permitem treinar redes muito profundas sem degradação de gradiente.",
+      "paper": "https://arxiv.org/pdf/1512.03385.pdf",
+      "img": "resnet_icon.png"
+    },
+    {
+      "date": "2016-08-29",
+      "name": "XGBoost",
+      "category": "Ensemble",
+      "authors": "Chen & Guestrin (2016)",
+      "description": "GBM otimizado em velocidade e escalabilidade; dominou competições de Kaggle.",
+      "paper": "https://arxiv.org/pdf/1603.02754.pdf",
+      "img": "xgboost_icon.png"
+    },
+    {
+      "date": "2018-10-11",
+      "name": "BERT",
+      "category": "Transformers",
+      "authors": "Devlin et al. (2018)",
+      "description": "Transformer pré-treinado em masked language modeling, usado em múltiplas tarefas de NLP.",
+      "paper": "https://arxiv.org/pdf/1810.04805.pdf",
+      "img": "bert_icon.png"
+    },
+    {
+      "date": "2020-10-23",
+      "name": "ViT",
+      "category": "Transformers",
+      "authors": "Dosovitskiy et al. (2020)",
+      "description": "Primeiro Transformer puro aplicado diretamente à classificação de imagens.",
+      "paper": "https://arxiv.org/pdf/2010.11929.pdf",
+      "img": "vit_icon.png"
+    },
+    {
+      "date": "2022-03-15",
+      "name": "Swin Transformer",
+      "category": "Transformers",
+      "authors": "Liu et al. (2021)",
+      "description": "Transformer hierárquico com janelas deslizantes (shifted windows) para visão.",
+      "paper": "https://arxiv.org/pdf/2103.14030.pdf",
+      "img": "swin_icon.png"
+    }
+  ]
+  
