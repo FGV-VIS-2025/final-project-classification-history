@@ -50,7 +50,7 @@
   {#each cells as cell}
     <div class="cell">
       {#if cell.img}
-        <img src={cell.img.filepath.replace("static/", "/")} alt={cell.img.filename} />
+        <img src={`${base}/${cell.img.filepath}`} alt={cell.img.filename} />
       {/if}
     </div>
   {/each}

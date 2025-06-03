@@ -1,14 +1,15 @@
 // src/lib/data/loadMnistAssets.js
 import * as tf from '@tensorflow/tfjs';
+import { base } from "$app/paths";
 
 export async function loadModel() {
   // “/” keeps it working after SvelteKit prerender / adapter-static
-  return tf.loadLayersModel('/models/mnist_model_tfjs_tiny/model.json');
+  return tf.loadLayersModel(`${base}/models/mnist_model_tfjs_tiny/model.json`);
 }
 
 export async function loadResume() {
-  const res = await fetch('/data/mnist/resume_copy.json');
-  if (!res.ok) throw new Error('Cannot fetch resume_copy.json');
+  const res = await fetch(`${base}/data/mnist/resume.json`);
+  if (!res.ok) throw new Error('Cannot fetch resume.json');
   return res.json();                     // → array of {filename,label,filepath}
 }
 
