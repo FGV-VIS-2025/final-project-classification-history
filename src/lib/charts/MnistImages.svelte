@@ -31,7 +31,7 @@
   }
 
   async function loadImages() {
-    const res = await fetch(`${base}/data/mnist/resume_copy.json`);
+    const res = await fetch(`${base}/data/mnist/resume.json`);
     images = await res.json();
     cells = Array.from({ length: gridSize * gridSize }, () => ({ img: getRandomImage(), intervalId: null }));
     cells.forEach((cell, idx) => startCellInterval(cell, idx));
