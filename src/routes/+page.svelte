@@ -9,6 +9,7 @@
     import Scrolly from "svelte-scrolly";
     import ScatterPlot from "$lib/charts/ScatterPlot.svelte";
     import History from "$lib/slides/History.svelte";
+    import Notable from "../lib/slides/Notable.svelte";
 
     let data = null;
     onMount(async () => {
@@ -87,6 +88,23 @@
         </div>
         <div class="picture">
             <History/>
+        </div>
+    </Slide>
+
+    <Slide>
+        <div class="text">
+            <h1>Notable AI Models</h1>
+                <p>
+                    Este gráfico mostra a evolução do esforço computacional (em FLOPs) necessário para treinar modelos de IA ao longo do tempo. 
+                    O eixo X representa o ano de publicação de cada modelo e o eixo Y (escala logarítmica) exibe o número de FLOPs.
+                </p>
+                <p>
+                    A região sombreada marca a “Deep Learning Era” (a partir de 2010), quando houve um aumento expressivo no uso de computação para treinar redes neurais. 
+                    Ao passar o mouse sobre cada ponto, aparece um tooltip próximo ao cursor mostrando o nome do modelo, o ano e a quantidade de FLOPs.
+                </p>
+        </div>
+        <div class="picture">
+            <Notable/>
         </div>
     </Slide>
     
