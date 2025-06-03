@@ -26,7 +26,6 @@
     onMount(async () => {
       const parseDate = d3.timeParse("%Y-%m-%d");
       data = await d3.json(`${base}/data/models_timeline.json`);
-      console.log(data)
       data.forEach(d => {
         d.parsedDate = parseDate(d.date);
         d.imgPath    = `${base}/architectures/${filenameMap[d.name] || "not_found.png"}`;

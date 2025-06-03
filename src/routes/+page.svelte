@@ -39,10 +39,6 @@
 </script>
 
 <Section>
-    <div class="progress">
-        {progress}
-    </div>
-
     <Scrolly bind:progress={progress}>
         <Step>
             <h1>What is classification?</h1>
@@ -139,12 +135,6 @@
 </Section>
 
 <style>
-    .progress {
-        position: fixed;
-        right: 0;
-        top: 0;
-    }
-
     /* Step */
     h1 {
         font-size: 40px;
@@ -168,13 +158,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    .cnn-wrapper {
-        display: flex;
-        flex: 1 1 100%;
-        gap: 24px;            /* space between Drawer and CNNExplorer */
-        align-items: flex-start;
-        height: 100%;         /* keeps both widgets full-height inside Slide */
     }
 
     /* ===== Estilos da legenda no lado esquerdo ===== */
