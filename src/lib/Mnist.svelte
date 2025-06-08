@@ -13,7 +13,9 @@
   }
 
   function getRandomDelay() {
-    return Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+    return (
+      Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval
+    );
   }
 
   function startCellInterval(cell, idx) {
@@ -33,7 +35,10 @@
   async function loadImages() {
     const res = await fetch(`${base}/data/mnist/resume.json`);
     images = await res.json();
-    cells = Array.from({ length: gridSize * gridSize }, () => ({ img: getRandomImage(), intervalId: null }));
+    cells = Array.from({ length: gridSize * gridSize }, () => ({
+      img: getRandomImage(),
+      intervalId: null,
+    }));
     cells.forEach((cell, idx) => startCellInterval(cell, idx));
   }
 
@@ -42,7 +47,7 @@
   });
 
   onDestroy(() => {
-    cells.forEach(cell => cell.intervalId && clearInterval(cell.intervalId));
+    cells.forEach((cell) => cell.intervalId && clearInterval(cell.intervalId));
   });
 </script>
 
