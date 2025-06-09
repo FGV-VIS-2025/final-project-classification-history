@@ -207,6 +207,73 @@
       <AIModels />
     </div>
   </Slide>
+
+  <!-- Conclusion -->
+  <Slide>
+    <div class="text">
+      <h1>Conclusion</h1>
+      <p>
+        As we have seen, humans have always needed to classify. With the advent of computers, classification has become
+        a research and development objective. From the first models such as the Perceptron, through more complex models
+        such as Convolutional Neural Networks (CNNs), to the most recent models with transformers, year after year the
+        progress has become greater and faster.
+      </p>
+      <p>
+        The next time you come across an object detection, speech recognition or any other classification system,
+        remember that behind that system lies a rich and complex history of research and development.
+      </p>
+      <p class="break-line">...</p>
+      <p>
+        This project was developed as part of the Data Visualization course at Fundacão Getúlio Vargas (FGV) in 2025.1.
+        It was developed by: 
+        <a href="https://github.com/wobetec" target="_blank">Esdras Cavalcanti</a>,
+        <a href="https://github.com/Vilasz" target="_blank">João Felipe</a> and
+        <a href="https://github.com/MasFz" target="_blank">Marcelo Angelo</a>.
+      </p>
+      <p>
+        You can check the source code on <a href="https://github.com/FGV-VIS-2025/final-project-classification-history">GitHub</a>.
+        Next you can see the project Report, Poster, Presentation and Teaser Video.
+      </p>
+    </div>
+    <div class="picture conclusion">
+      <div class="row">
+        <a href="/">
+          <div class="media-container">
+            <h2>Report</h2>
+            <img class="a4" src="" alt="">
+          </div>
+        </a>
+        <a href="/">
+          <div class="media-container">
+            <h2>Poster</h2>
+            <img class="a4" src="" alt="">
+          </div>
+        </a>
+      </div>
+      <div class="row">
+        <div class="media-container">
+          <h2>Teaser</h2>
+          <iframe
+            title="Teaser Video"
+            src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
+            width="480"
+            height="270"
+            allow="autoplay"
+          ></iframe>
+        </div>
+        <div class="media-container">
+          <h2>Presentation</h2>
+          <iframe
+            title="Presentation Video"
+            src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
+            width="480"
+            height="270"
+            allow="autoplay"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </Slide>
 </Section>
 
 <style>
@@ -223,6 +290,12 @@
     font-size: 20px;
   }
 
+  p.break-line {
+    margin: 20px auto;
+    text-indent: 0;
+    text-align: center;
+  }
+
   .text {
     width: 30%;
     padding: 30px;
@@ -236,7 +309,7 @@
     align-items: center;
   }
 
-  /* ===== Estilos da legenda no lado esquerdo ===== */
+  /* ===== Legend styles on the left side ===== */
   .legend-in-text {
     margin-top: 1rem;
     padding: 0.5rem;
@@ -261,4 +334,47 @@
     margin-right: 8px;
   }
   /* ============================================ */
+
+  .conclusion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .conclusion a {
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .conclusion a:hover {
+    transform: scale(1.05);
+  }
+
+  .row {
+    display: flex;
+    gap: 20px;
+  }
+
+  .media-container {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--color-bg-lv2);
+  }
+
+  .a4 {
+    width: 210px;
+    height: 297px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--color-font-dark-grain);
+  }
 </style>
