@@ -48,11 +48,12 @@
     <Step>
       <h1>What is classification?</h1>
       <p>
-        Classification is nothing more than giving a set of labels (or classes)
-        and a set of data, assigning a label (or more than one depending on the
-        case) to each piece of data. In a more direct way, classification is the
-        process of identifying which category a new piece of data belongs to,
-        based on a set of already labeled data.
+        Classification is nothing more than giving a set of labels (or classes) and a set of data, assigning a label
+        (or more than one depending on the case) to each piece of data. In a more direct way,
+        <span class="highlight">
+          classification is the process of identifying which category a new piece of data belongs
+        </span>
+        to, based on a set of already labeled data.
       </p>
       <p>
         Humans have always needed to classify objects. Whether it's to identify
@@ -113,7 +114,7 @@
         classes, so the Perceptron cannot solve the problema.
       </p>
       <p>
-        In the graph on the side, for example, it is impossible to have a single
+        In the graph on the side, for example, it is <span class="highlight">impossible</span> to have a single
         line separating the blue dots from the red dots. You can try.
       </p>
     </Step>
@@ -126,6 +127,11 @@
   <Slide>
     <div class="text">
       <h1>MNIST</h1>
+      <p>
+        Now, let's jump into the world of machine learning for image classification. One of the most famous datasets
+        used for training and testing image classification algorithms is the MNIST dataset. It has been a benchmark
+        for evaluating the performance of various machine learning models, especially in the field of computer vision.
+      </p>
       <p>
         The MNIST dataset is a collection of handwritten digits that is widely
         used in the field of machine learning. It contains 60,000 training
@@ -145,10 +151,27 @@
     <div class="text">
       <h1>CNN</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat minus
-        provident eveniet id error necessitatibus reiciendis, corporis,
-        consequatur quod distinctio temporibus deserunt a aperiam minima vel,
-        laborum voluptate. Earum, labore?
+        After Multilayer Perceptrons (MLPs) successfully tackled the XOR problem, it marked a pivotal moment
+        in the history of neural networks, proving their capability to learn non-linear decision boundaries.
+        This breakthrough naturally led researchers to apply these models to more complex challenges like MNIST.
+      </p>
+      <p>
+        However, MLPs have limitations with images. They flatten images into long vectors, ignoring the important
+        spatial relationships between pixels. This leads to too many parameters, making the networks slow and likely
+        to overfit. A new approach was needed—one that could recognize local patterns in images, like the strokes
+        and curves of a digit.
+      </p>
+      <p>
+        This necessity paved the way for the development of Convolutional Neural Networks (CNNs), a revolutionary
+        architecture inspired by the human visual cortex. Unlike MLPs, CNNs utilize convolutional layers to
+        <span class="highlight">automatically and adaptively learn spatial hierarchies of features</span>,
+        from simple edges and corners to more
+        complex motifs. By incorporating concepts like parameter sharing and pooling layers, CNNs could efficiently
+        process raw pixel data, capture the spatial dependencies, and achieve a high degree of invariance to
+        transformations like translation and scaling.
+      </p>
+      <p>
+        Here you can play with the VGGNet architecture and draw a digit to see how the CNN classifies it and what is inside the CNN.
       </p>
     </div>
     <div class="picture">
@@ -159,14 +182,19 @@
   <!-- History (onde colocamos a legenda à esquerda) -->
   <Slide>
     <div class="text">
-      <h1>History</h1>
+      <h1>Other Models</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
-        tempora rem necessitatibus deleniti quibusdam omnis, magni minima natus
-        debitis consectetur voluptatum. Blanditiis, odio maxime laudantium in
-        doloremque eius ipsa inventore?
+        While revolutionary, Convolutional Neural Networks (CNNs) were a critical milestone, not the final word in classification.
+        Other powerful approaches also excelled, with Kernel methods like SVMs finding complex decision boundaries and Ensemble
+        techniques like Random Forests offering exceptional robustness by combining simpler models.
       </p>
-
+      <p>
+        The evolution within deep learning didn't stop there, leading to even deeper and more powerful architectures.
+        More recently, <span class="highlight">Transformers have caused a paradigm shift</span>.
+        Originally designed for language, their attention-based
+        architecture has been successfully adapted to computer vision, challenging the dominance of CNNs and representing
+        the current cutting edge.
+      </p>
       {#if legendCategories.length}
         <div class="legend-in-text">
           {#each legendCategories as cat}
@@ -189,18 +217,36 @@
   <!-- AIModels AI Models -->
   <Slide>
     <div class="text">
-      <h1>AIModels AI Models</h1>
+      <h1>Models complexity</h1>
+      <p>
+        However "with great power comes great responsibility". In deep learning, this
+        phrase can be translated to "With great models comes great computational
+        effort". As models have become more complex, the computational effort
+        required to train them has also increased significantly.
+      </p>
       <p>
         This graph shows the evolution of the computational effort (in FLOPs)
-        required to train AI models over time. The X-axis represents the year
+        required to train models over time. The X-axis represents the year
         each model was published, and the Y-axis (log scale) displays the number
         of FLOPs.
       </p>
       <p>
-        The shaded region marks the “Deep Learning Era” (from 2010 onwards),
+        The shaded region marks the "Deep Learning Era" (from 2010 onwards),
         when there was a significant increase in the use of computing to train
         neural networks. When you hover over each point, a tooltip appears near
         the cursor showing the model name, year and number of FLOPs.
+      </p>
+      <p>
+        As you can see, the computational effort required to train models has
+        increased exponentially over the years, more than that it increase it's growth rate.
+        This is due to the increasing complexity of models, the growing amount of data available for training, and the
+        increasing availability of computational resources.
+      </p>
+      <p>
+        The question that remains is: "How far can we go?" or "How far humans want to push the limits of
+        computer models for classification?".
+        At least for now, the answer is: "We don't know yet". We don't even know if we have reached the limit of what is possible with
+        computer models for classification. But one thing is certain: the future of classification is very promising. 
       </p>
     </div>
     <div class="picture">
@@ -290,6 +336,12 @@
     font-size: 20px;
   }
 
+  span.highlight {
+    background-color: var(--color-highlight);
+    padding: 0 5px;
+    border-radius: 20px;
+  }
+
   p.break-line {
     margin: 20px auto;
     text-indent: 0;
@@ -335,6 +387,7 @@
   }
   /* ============================================ */
 
+  /* ===== Conclusion slide ===== */
   .conclusion {
     display: flex;
     flex-direction: column;
@@ -377,4 +430,5 @@
     text-align: center;
     color: var(--color-font-dark-grain);
   }
+  /* ============================================ */
 </style>
