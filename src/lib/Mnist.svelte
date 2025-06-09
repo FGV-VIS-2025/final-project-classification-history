@@ -16,11 +16,6 @@
       .fill()
       .map((_, d) => images.filter((img) => img.label === d));
     selectorImages = digitImages.map((imgs) => imgs[0]);
-    cells = Array.from({ length: gridSize * gridSize }, () => ({
-      img: getRandomImage(),
-      intervalId: null,
-    }));
-    cells.forEach((cell, idx) => startCellInterval(cell, idx));
   }
 
   onMount(() => {
@@ -56,16 +51,6 @@
       {/each}
     </div>
   {/if}
-</div>
-
-<div class="grid">
-  {#each cells as cell}
-    <div class="cell">
-      {#if cell.img}
-        <img src={`${base}/${cell.img.filepath}`} alt={cell.img.filename} />
-      {/if}
-    </div>
-  {/each}
 </div>
 
 <style>

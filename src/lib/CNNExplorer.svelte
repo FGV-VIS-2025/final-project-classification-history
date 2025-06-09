@@ -7,7 +7,7 @@
 </script>
 
 <div class="cnn-explorer">
-  <CNNExplorer />
+  <CNNExplorer bind:pixelMatrix/>
   <Drawer bind:pixelMatrix />
 </div>
 
