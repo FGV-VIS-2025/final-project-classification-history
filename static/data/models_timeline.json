@@ -1,93 +1,82 @@
 [
-    {
-      "date": "1992-01-01",
-      "name": "Support Vector Machine",
-      "category": "Linear/Kernels",
-      "authors": "Cortes & Vapnik (1995)",
-      "description": "Margem máxima para classificação binária; introdução ao kernel trick.",
-      "paper": "https://www.csie.ntu.edu.tw/~cjlin/papers/cone_filter.pdf",
-      "img": "svm_icon.png"
-    },
-    {
-      "date": "2001-01-01",
-      "name": "Random Forest",
-      "category": "Ensemble",
-      "authors": "Breiman (2001)",
-      "description": "Bagging de árvores de decisão com seleção aleatória de features.",
-      "paper": "https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf",
-      "img": "rf_icon.png"
-    },
-    {
-      "date": "2005-01-01",
-      "name": "Gradient Boosting Machine",
-      "category": "Ensemble",
-      "authors": "Friedman (2001)",
-      "description": "Árvores sequenciais ajustadas para corrigir erros residuais cumulativos.",
-      "paper": "https://statweb.stanford.edu/~jhf/ftp/trebst.pdf",
-      "img": "gbm_icon.png"
-    },
-    {
-      "date": "2012-01-01",
-      "name": "AlexNet",
-      "category": "Deep Learning",
-      "authors": "Krizhevsky, Sutskever & Hinton (2012)",
-      "description": "CNN profunda que revolucionou visão computacional no ImageNet.",
-      "paper": "http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf",
-      "img": "alexnet_icon.png"
-    },
-    {
-      "date": "2014-09-04",
-      "name": "VGG",
-      "category": "Deep Learning",
-      "authors": "Szegedy et al. (2014)",
-      "description": "Redes mais profundas (16–19 camadas) com pequenos filtros 3×3.",
-      "paper": "https://arxiv.org/pdf/1409.1556.pdf",
-      "img": "vgg_icon.png"
-    },
-    {
-      "date": "2015-10-27",
-      "name": "ResNet",
-      "category": "Deep Learning",
-      "authors": "He et al. (2015)",
-      "description": "Blocos residuais que permitem treinar redes muito profundas sem degradação de gradiente.",
-      "paper": "https://arxiv.org/pdf/1512.03385.pdf",
-      "img": "resnet_icon.png"
-    },
-    {
-      "date": "2016-08-29",
-      "name": "XGBoost",
-      "category": "Ensemble",
-      "authors": "Chen & Guestrin (2016)",
-      "description": "GBM otimizado em velocidade e escalabilidade; dominou competições de Kaggle.",
-      "paper": "https://arxiv.org/pdf/1603.02754.pdf",
-      "img": "xgboost_icon.png"
-    },
-    {
-      "date": "2018-10-11",
-      "name": "BERT",
-      "category": "Transformers",
-      "authors": "Devlin et al. (2018)",
-      "description": "Transformer pré-treinado em masked language modeling, usado em múltiplas tarefas de NLP.",
-      "paper": "https://arxiv.org/pdf/1810.04805.pdf",
-      "img": "bert_icon.png"
-    },
-    {
-      "date": "2020-10-23",
-      "name": "ViT",
-      "category": "Transformers",
-      "authors": "Dosovitskiy et al. (2020)",
-      "description": "Primeiro Transformer puro aplicado diretamente à classificação de imagens.",
-      "paper": "https://arxiv.org/pdf/2010.11929.pdf",
-      "img": "vit_icon.png"
-    },
-    {
-      "date": "2022-03-15",
-      "name": "Swin Transformer",
-      "category": "Transformers",
-      "authors": "Liu et al. (2021)",
-      "description": "Transformer hierárquico com janelas deslizantes (shifted windows) para visão.",
-      "paper": "https://arxiv.org/pdf/2103.14030.pdf",
-      "img": "swin_icon.png"
-    }
-  ]
-  
+  {
+    "date": "1992-01-01",
+    "name": "Support Vector Machine",
+    "category": "Linear/Kernels",
+    "authors": "Cortes & Vapnik (1995)",
+    "description": "Imagine drawing the widest possible line that separates two groups of points on a sheet of paper—that’s what an SVM does. It finds the boundary with the largest margin on each side, making it robust to noise. With the ‘kernel trick’, it can also bend the data into higher dimensions to separate even tangled classes. This margin-maximizing idea gives SVMs strong performance on many classification tasks.",
+    "img": "svm_icon.png"
+  },
+  {
+    "date": "2001-01-01",
+    "name": "Random Forest",
+    "category": "Ensemble",
+    "authors": "Breiman (2001)",
+    "description": "Random Forest builds a ‘forest’ of decision trees, each trained on a random subset of data and features. By letting all trees vote and averaging their outputs, it reduces overfitting and smooths out errors. The built-in randomness makes it both accurate and resilient with minimal tuning. It’s a go-to method when you need reliable predictions without deep parameter tweaking.",
+    "img": "rf_icon.png"
+  },
+  {
+    "date": "2005-01-01",
+    "name": "Gradient Boosting Machine",
+    "category": "Ensemble",
+    "authors": "Friedman (2001)",
+    "description": "Gradient Boosting Machine creates trees one after another, where each new tree focuses on correcting the biggest mistakes of the previous ones. It’s like chiseling away at errors step by step to build a strong overall model. By combining many weak learners in sequence, GBM often achieves top accuracy. Careful tuning of learning rate and tree depth lets it excel on challenging datasets.",
+    "img": "gbm_icon.png"
+  },
+  {
+    "date": "2012-01-01",
+    "name": "AlexNet",
+    "category": "Deep Learning",
+    "authors": "Krizhevsky, Sutskever & Hinton (2012)",
+    "description": "AlexNet was the first deep convolutional network to win the ImageNet competition, showing that stacking many layers of filters can dramatically boost image recognition. It introduced ReLU activations for faster training and dropout to reduce overfitting. By learning feature hierarchies directly from pixels, it replaced hand-engineered features. Its success sparked the modern era of deep learning in computer vision.",
+    "img": "alexnet_icon.png"
+  },
+  {
+    "date": "2014-09-04",
+    "name": "VGG",
+    "category": "Deep Learning",
+    "authors": "Szegedy et al. (2014)",
+    "description": "VGG pushed depth even further by stacking many small 3×3 filters in sequential layers, making the architecture simple and uniform. This regular pattern made it easy to scale up and learn complex feature hierarchies. Despite its simplicity, VGG achieved top performance on ImageNet, highlighting the power of depth. The trade-off is higher compute and memory needs compared to earlier networks.",
+    "img": "vgg_icon.png"
+  },
+  {
+    "date": "2015-10-27",
+    "name": "ResNet",
+    "category": "Deep Learning",
+    "authors": "He et al. (2015)",
+    "description": "ResNet introduced ‘skip connections’ that let the network bypass one or more layers, making it easy to train extremely deep models without losing gradient signal. These residual blocks learn adjustments to the input rather than full transformations, so even 50+ layer networks converge smoothly. This breakthrough enabled very deep architectures with unprecedented accuracy. Skip connections have become a staple in almost all modern neural networks.",
+    "img": "resnet_icon.png"
+  },
+  {
+    "date": "2016-08-29",
+    "name": "XGBoost",
+    "category": "Ensemble",
+    "authors": "Chen & Guestrin (2016)",
+    "description": "XGBoost is an optimized, scalable implementation of gradient boosting that adds clever tricks—like regularization, shrinkage, and parallel processing—to speed up training and improve accuracy. It also handles missing data gracefully and offers built-in cross-validation. These enhancements made it the go-to choice in data science competitions. Its blend of speed, flexibility, and performance set a new standard for boosting methods.",
+    "img": "xgboost_icon.png"
+  },
+  {
+    "date": "2018-10-11",
+    "name": "BERT",
+    "category": "Transformers",
+    "authors": "Devlin et al. (2018)",
+    "description": "BERT is a bidirectional transformer that learns language by predicting randomly masked words in large text corpora, gaining context from both left and right. After this self-supervised pre-training, it can be fine-tuned on specific tasks—like question answering or sentiment analysis—with just a few tweaks. Its deep, contextual embeddings revolutionized NLP by capturing subtle language nuances. BERT set the stage for nearly all subsequent language models.",
+    "img": "bert_icon.png"
+  },
+  {
+    "date": "2020-10-23",
+    "name": "ViT",
+    "category": "Transformers",
+    "authors": "Dosovitskiy et al. (2020)",
+    "description": "Vision Transformer (ViT) treats an image as a sequence of fixed-size patches—just like words in a sentence—and feeds them into a standard transformer. By relying on self-attention instead of convolutions, it models long-range relationships between patches. When trained on enough data, ViT matches or surpasses top CNNs. It demonstrated that pure transformer architectures can excel on vision tasks.",
+    "img": "vit_icon.png"
+  },
+  {
+    "date": "2022-03-15",
+    "name": "Swin Transformer",
+    "category": "Transformers",
+    "authors": "Liu et al. (2021)",
+    "description": "Imagine looking at a photo through a grid of small windows and understanding each patch locally, then shifting those windows to mix in new neighbors—that’s the Swin Transformer. It computes self-attention only within local windows for efficiency, then shifts the window positions every other layer so information flows across regions. Between stages it merges patches (like pooling) to build multi-scale features. This hierarchical, shifted-window design balances speed with global context, making it highly effective for image classification, detection, and beyond.",
+    "img": "swin_icon.png"
+  }
+]
