@@ -13,6 +13,10 @@
   let xAxisGroup;
   let yAxisGroup;
 
+  // estados de hover e seleção
+  let hoveredDatum = null;
+  let fixedDatum   = null;
+
   const formatYear = d3.timeFormat("%Y");
   const formatFlops = (n) => n.toExponential(2);
 
@@ -67,17 +71,17 @@
     d3.select(yAxisGroup).call(yAxis);
   }
 
+  // tooltip genérico
   function showTooltip(datum) {
     const tt = document.getElementById("tooltip");
     if (!tt) return;
 
     tt.innerHTML = `
-        <strong>${datum.name}</strong><br/>
-        Year: ${formatYear(datum.pubDate)}<br/>
-        FLOPs: ${formatFlops(datum.flops)}
-      `;
+      <strong>${datum.name}</strong><br/>
+      Year: ${formatYear(datum.pubDate)}<br/>
+      FLOPs: ${formatFlops(datum.flops)}
+    `;
     tt.style.visibility = "visible";
-
     document.addEventListener("mousemove", moveTooltip);
   }
 
@@ -94,21 +98,40 @@
     if (!tt || !container) return;
 
     const rect = container.getBoundingClientRect();
-
     const offsetX = e.clientX - rect.left + 10;
     const offsetY = e.clientY - rect.top + 10;
-
     tt.style.left = `${offsetX}px`;
     tt.style.top = `${offsetY}px`;
+  }
+
+  // handlers de hover / click
+  function handleCircleMouseEnter(d) {
+    hoveredDatum = d;
+    showTooltip(d);
+  }
+
+  function handleCircleMouseLeave() {
+    hoveredDatum = null;
+    if (!fixedDatum) hideTooltip();
+  }
+
+  function handleCircleClick(d) {
+    fixedDatum = d;
+    showTooltip(d);
+  }
+
+  function handleContainerClick() {
+    fixedDatum = null;
+    hideTooltip();
   }
 </script>
 
 <main>
-  <div class="chart-container">
+  <div class="chart-container" on:click={handleContainerClick}>
     {#if data.length === 0}
       <p>Carregando dados…</p>
     {:else}
-      <svg {width} {height}>
+      <svg {width} {height} on:click|stopPropagation>
         <text
           x={width / 2}
           y={margin.top / 2}
@@ -159,12 +182,14 @@
 
         {#each data as d (d.name)}
           <circle
-            class="point"
             cx={xScale(d.pubDate)}
             cy={yScale(d.flops)}
             r="4"
-            on:mouseenter={() => showTooltip(d)}
-            on:mouseleave={hideTooltip}
+            class="point"
+            class:highlight={hoveredDatum === d}
+            on:mouseenter={() => handleCircleMouseEnter(d)}
+            on:mouseleave={handleCircleMouseLeave}
+            on:click|stopPropagation={() => handleCircleClick(d)}
             aria-hidden="true"
           />
         {/each}
@@ -211,6 +236,12 @@
   .point {
     fill: teal;
     opacity: 0.7;
+  }
+
+  /* destaque no hover */
+  .point.highlight {
+    stroke: #333;
+    stroke-width: 2px;
   }
 
   #tooltip {
