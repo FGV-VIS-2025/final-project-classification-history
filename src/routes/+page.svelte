@@ -7,12 +7,12 @@
   import Mnist from "$lib/Mnist.svelte";
   import History from "$lib/History.svelte";
   import CNNExplorer from "$lib/CNNExplorer.svelte";
-  
+
   // Charts
   import AIModels from "$lib/charts/AIModels.svelte";
   import ScatterPlot from "$lib/charts/ScatterPlot.svelte";
 
-  // Componetns
+  // Components
   import Section from "$lib/components/layout/Section.svelte";
   import Slide from "$lib/components/layout/Slide.svelte";
   import Step from "$lib/components/scrolly/Step.svelte";
@@ -30,8 +30,7 @@
     { sufix: "xor" },
   ];
 
-
-  // ====== Variáveis para empacotar a legenda do Timeline ======
+  // ====== Timeline Legend Variables ======
   let legendCategories = [];
   let legendColorScale;
 
@@ -39,11 +38,138 @@
     legendCategories = event.detail.categories;
     legendColorScale = event.detail.colorScale;
   }
-  // ==============================================================
+
+  // ====== Extraordinary Cover Page Animation ======
+  onMount(() => {
+    const canvas = document.getElementById("constellation-canvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 150 };
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    window.addEventListener("mousemove", (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+    window.addEventListener("mouseout", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    class Particle {
+        constructor(x, y, directionX, directionY, size, color) {
+            this.x = x;
+            this.y = y;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.size = size;
+            this.color = color;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        update() {
+            if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+            if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+            this.x += this.directionX;
+            this.y += this.directionY;
+            this.draw();
+        }
+    }
+
+    function init() {
+        particles = [];
+        let numberOfParticles = (canvas.height * canvas.width) / 9000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            let size = Math.random() * 2 + 1;
+            let x = Math.random() * (innerWidth - size * 2 - size * 2) + size * 2;
+            let y = Math.random() * (innerHeight - size * 2 - size * 2) + size * 2;
+            let directionX = Math.random() * 0.4 - 0.2;
+            let directionY = Math.random() * 0.4 - 0.2;
+            let color = "rgba(0, 170, 255, 0.8)";
+            particles.push(new Particle(x, y, directionX, directionY, size, color));
+        }
+    }
+
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let distance = ((particles[a].x - particles[b].x) ** 2) + ((particles[a].y - particles[b].y) ** 2);
+                if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                    opacityValue = 1 - (distance / 20000);
+                    ctx.strokeStyle = `rgba(0, 255, 204, ${opacityValue})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[b].y);
+                    ctx.lineTo(particles[b].x, particles[a].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        // Connect to mouse
+        if (mouse.x !== null && mouse.y !== null) {
+            for(let i = 0; i < particles.length; i++){
+                let distance = ((particles[i].x - mouse.x) ** 2) + ((particles[i].y - mouse.y) ** 2);
+                if(distance < mouse.radius * mouse.radius){
+                    opacityValue = 1 - (distance / (mouse.radius*mouse.radius));
+                    ctx.strokeStyle = `rgba(0, 170, 255, ${opacityValue * 0.8})`;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(mouse.x, mouse.y);
+                    ctx.lineTo(particles[i].x, particles[i].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+        connect();
+    }
+
+    init();
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  });
 </script>
 
 <Section>
-  <!-- Scrolly -->
+  <Slide id="cover-page">
+    <canvas id="constellation-canvas"></canvas>
+    <div class="cover-content">
+      <h1 class="cover-title">The Evolution of Classification</h1>
+      <p class="cover-subtitle">From logic to convolution networks</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to Begin</span>
+      <div class="celestial-cascade">
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+      </div>
+    </div>
+  </Slide>
+
   <Scrolly bind:progress>
     <Step>
       <h1>What is classification?</h1>
@@ -81,7 +207,7 @@
         In the 1950s, psychologist Frank Rosenblatt created the Perceptron, a
         mathematical model inspired by the workings of the human brain. The
         Perceptron is a linear classifier that tries to find a line (or
-        hyperplane) that separates data into different classes. The idea is that
+        hyperplane) that separates the data into different classes. The idea is that
         by adjusting the weights of the inputs, the Perceptron can learn to
         correctly classify the data.
       </p>
@@ -123,7 +249,6 @@
     </svelte:fragment>
   </Scrolly>
 
-  <!-- MNIST -->
   <Slide>
     <div class="text">
       <h1>MNIST</h1>
@@ -146,7 +271,6 @@
     </div>
   </Slide>
 
-  <!-- Trained CNN -->
   <Slide>
     <div class="text">
       <h1>CNN</h1>
@@ -179,7 +303,6 @@
     </div>
   </Slide>
 
-  <!-- History (onde colocamos a legenda à esquerda) -->
   <Slide>
     <div class="text">
       <h1>Other Models</h1>
@@ -214,7 +337,6 @@
     </div>
   </Slide>
 
-  <!-- AIModels AI Models -->
   <Slide>
     <div class="text">
       <h1>Models complexity</h1>
@@ -254,7 +376,6 @@
     </div>
   </Slide>
 
-  <!-- Conclusion -->
   <Slide>
     <div class="text">
       <h1>Conclusion</h1>
@@ -270,165 +391,392 @@
       </p>
       <p class="break-line">...</p>
       <p>
-        This project was developed as part of the Data Visualization course at Fundacão Getúlio Vargas (FGV) in 2025.1.
-        It was developed by: 
+        This project was developed by: 
         <a href="https://github.com/wobetec" target="_blank">Esdras Cavalcanti</a>,
-        <a href="https://github.com/Vilasz" target="_blank">João Felipe</a> and
+        <a href="https://github.com/Vilasz" target="_blank">João Felipe</a> &
         <a href="https://github.com/MasFz" target="_blank">Marcelo Angelo</a>.
       </p>
       <p>
-        You can check the source code on <a href="https://github.com/FGV-VIS-2025/final-project-classification-history">GitHub</a>.
-        Next you can see the project Report, Poster, Presentation and Teaser Video.
+        Check the source code on <a href="https://github.com/FGV-VIS-2025/final-project-classification-history">GitHub</a>.
       </p>
     </div>
     <div class="picture conclusion">
-      <div class="row">
-        <a href="/">
-          <div class="media-container">
-            <h2>Report</h2>
-            <img class="a4" src="" alt="">
-          </div>
-        </a>
-        <a href="/">
-          <div class="media-container">
-            <h2>Poster</h2>
-            <img class="a4" src="" alt="">
-          </div>
-        </a>
-      </div>
-      <div class="row">
+      <a href="/" class="media-link">
+        <div class="media-container">
+          <h2>Report</h2>
+          <div class="placeholder-a4"></div>
+        </div>
+      </a>
+      <a href="/" class="media-link">
+        <div class="media-container">
+          <h2>Poster</h2>
+          <div class="placeholder-a4"></div>
+        </div>
+      </a>
+      <a href="/" class="media-link teaser-link">
         <div class="media-container">
           <h2>Teaser</h2>
           <iframe
             title="Teaser Video"
             src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
-            width="480"
-            height="270"
             allow="autoplay"
           ></iframe>
         </div>
+      </a>
+       <a href="/" class="media-link presentation-link">
         <div class="media-container">
           <h2>Presentation</h2>
           <iframe
             title="Presentation Video"
             src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
-            width="480"
-            height="270"
             allow="autoplay"
           ></iframe>
         </div>
-      </div>
+      </a>
     </div>
   </Slide>
 </Section>
 
 <style>
-  /* Step */
+  :root {
+    --color-bg-dark: #121212;
+    --color-bg-light: #1e1e1e;
+    --color-primary: #00aaff;
+    --color-accent: #00ffcc;
+    --color-secondary-accent: #ff00ff; /* Added a magenta for the title gradient */
+    --color-text: #e0e0e0;
+    --color-text-dark: #333333;
+    --font-family-main: "Roboto", sans-serif;
+    --font-family-headings: "Montserrat", sans-serif;
+  }
+
+  /* === STYLES FOR SCROLLY (LIGHT THEME) === */
   h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
+    font-family: var(--font-family-headings);
+    font-size: 3rem;
+    color: var(--color-text-dark);
+    margin-bottom: 1.5rem;
   }
 
   p {
-    text-indent: 30px;
+    font-family: var(--font-family-main);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-indent: 1.5rem;
     text-align: justify;
-    margin-bottom: 10px;
-    font-size: 20px;
+    margin-bottom: 1rem;
+    color: var(--color-text-dark);
   }
 
   span.highlight {
-    background-color: var(--color-highlight);
-    padding: 0 5px;
-    border-radius: 20px;
+    background-color: rgba(0, 170, 255, 0.15);
+    color: #005bb5;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-weight: bold;
   }
 
-  p.break-line {
-    margin: 20px auto;
-    text-indent: 0;
-    text-align: center;
-  }
-
+  /* === STYLES FOR DARK THEME SLIDES === */
   .text {
-    width: 30%;
-    padding: 30px;
+    width: 40%;
+    padding: 2rem;
+    background: linear-gradient(145deg, var(--color-bg-light), var(--color-bg-dark));
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 
+  .text h1 {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px var(--color-primary);
+  }
+
+  .text p {
+    color: var(--color-text);
+  }
+  
+  .text a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: text-shadow 0.3s;
+  }
+  
+  .text a:hover {
+	text-shadow: 0 0 8px var(--color-accent);
+  }
+
+  .text span.highlight {
+    background-color: rgba(0, 170, 255, 0.2);
+    color: var(--color-accent);
+  }
+  
   .picture {
-    width: 70%;
+    width: 60%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
+  }
+  
+  .legend-in-text {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--color-bg-dark);
+    border: 1px solid var(--color-primary);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.2);
   }
 
-  /* ===== Legend styles on the left side ===== */
-  .legend-in-text {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
   .legend-item {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
-  .legend-item:last-child {
-    margin-bottom: 0;
+  
+  .legend-item span {
+	  color: var(--color-text);
   }
-  .legend-color {
-    width: 12px;
-    height: 12px;
-    border: 1px solid #999;
-    margin-right: 8px;
-  }
-  /* ============================================ */
 
-  /* ===== Conclusion slide ===== */
-  .conclusion {
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+  }
+
+  p.break-line {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin: 2rem 0;
+  }
+  
+  /* === UPGRADED EXTRAORDINARY COVER PAGE === */
+  #cover-page {
+    display: flex; /* Ensures centering works */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #03001C; /* Deep dark blue */
+    padding: 2rem;
+    color: var(--color-text);
+    overflow: hidden;
+  }
+
+  #constellation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .cover-content {
+  /* place dead-centre on the slide */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* ► veil gone  */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  padding: 0;
+}
+
+/* === HERO TITLE (update) === */
+.cover-title {
+  font-size: 6rem;          /* a bit larger */
+  font-weight: 800;
+  margin: 0;
+
+  /* animated “data-stream” gradient in deep-blue tones */
+  background: linear-gradient(
+      90deg,
+      #002bff 0%,
+      #0080ff 25%,
+      #00e0ff 50%,
+      #0080ff 75%,
+      #002bff 100%
+  );
+  background-size: 400% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  animation: ml-stream 8s linear infinite;
+
+  text-shadow: 0 0 18px rgba(0, 64, 255, 0.7);
+}
+
+  /* keyframes for the new effect */
+  @keyframes ml-stream {
+    0%   { background-position:   0% 0; }
+    100% { background-position: -400% 0; }
+  }
+
+  
+  /* @keyframes text-gradient-flow {
+      to {
+          background-position: -200% center;
+      }
+  } */
+  
+  .cover-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    text-indent: 0;
+    text-align: center;
+    max-width: 600px;
+    opacity: 0.8;
+  }
+  
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Fine-tune horizontal centering */
+    color: var(--color-text);
+    font-size: 1rem;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    gap: 0.5rem;
   }
 
-  .conclusion a {
-    text-decoration: none;
-    transition: transform 0.2s ease-in-out;
+  /* NEW "CELESTIAL CASCADE" BUTTON */
+  .celestial-cascade {
+    position: relative;
+    width: 24px;
+    height: 40px; /* Increased height for more room */
   }
 
-  .conclusion a:hover {
-    transform: scale(1.05);
+  .chevron {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    transform: scale(0.3) rotate(45deg);
+    animation: cascade-scroll 3s infinite;
+    box-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent);
+  }
+  .chevron:before,
+  .chevron:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+  .chevron:before {
+    top: 0;
+    left: -50%;
+  }
+  .chevron:after {
+    top: 50%;
+    left: 0;
+    transform: rotate(90deg);
+    transform-origin: top left;
   }
 
-  .row {
+  /* Staggered animation delays for the cascade effect */
+  .chevron:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .chevron:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  .chevron:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  @keyframes cascade-scroll {
+    0% {
+      transform: translateY(-10px) scale(0.5) rotate(45deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(20px) scale(1.2) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+
+  /* === FIXED CONCLUSION SLIDE === */
+  .conclusion {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+  }
+  
+  .media-link {
+	  text-decoration: none;
     display: flex;
-    gap: 20px;
   }
 
   .media-container {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: var(--color-bg-lv2);
-  }
-
-  .a4 {
-    width: 210px;
-    height: 297px;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    background: rgba(44, 44, 44, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   }
 
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: var(--color-font-dark-grain);
+  .media-link:hover .media-container {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
+    background: rgba(44, 44, 44, 0.9);
   }
-  /* ============================================ */
+
+  .conclusion h2 {
+    font-family: var(--font-family-headings);
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    text-align: center;
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  .placeholder-a4 {
+    width: 100%;
+    max-width: 180px;
+    aspect-ratio: 210 / 297;
+    background-color: rgba(26, 26, 26, 0.5);
+    border: 2px dashed var(--color-primary);
+    border-radius: 5px;
+    margin: auto 0;
+  }
+  
+  .conclusion iframe {
+	  width: 100%;
+    aspect-ratio: 16 / 9;
+	  border: none;
+	  border-radius: 10px;
+    margin: auto 0;
+  }
 </style>

@@ -21,6 +21,7 @@
 	"type": "module",
 	"dependencies": {
 		"@tensorflow/tfjs": "^4.22.0",
-		"d3-scale": "^4.0.2"
+		"d3-scale": "^4.0.2",
+		"three": "^0.177.0"
 	}
 }
