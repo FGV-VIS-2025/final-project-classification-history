@@ -157,7 +157,7 @@
   <Slide id="cover-page">
     <canvas id="constellation-canvas"></canvas>
     <div class="cover-content">
-      <h1 class="cover-title">The Evolution of Classification</h1>
+      <h1 class="cover-title">Classification History</h1>
       <p class="cover-subtitle">From logic to convolution networks</p>
     </div>
     <div class="scroll-indicator">
@@ -271,7 +271,7 @@
     </div>
   </Slide>
 
-  <Slide>
+  <!-- <Slide>
     <div class="text">
       <h1>CNN</h1>
       <p>
@@ -300,6 +300,20 @@
     </div>
     <div class="picture">
       <CNNExplorer />
+    </div>
+  </Slide> -->
+
+  <Slide id="cnn-slide">
+    <div class="slide-content-wrapper">
+      <div class="text-header">
+        <h1>Inside the Convolution</h1>
+        <p>
+          This is an interactive demonstration of a Convolutional Neural Network (CNN). Unlike older models that see images as flat lists of pixels, CNNs use 'filters' to scan for patterns, mimicking the human visual cortex. See this process live below.
+        </p>
+      </div>
+      <div class="interactive-area">
+        <CNNExplorer />
+      </div>
     </div>
   </Slide>
 
@@ -779,4 +793,47 @@
 	  border-radius: 10px;
     margin: auto 0;
   }
+
+  /* Add these styles to your +page.svelte style block */
+#cnn-slide {
+  background: #03001C; /* A deep, futuristic blue */
+  color: var(--color-text);
+  padding: 2rem 3rem; /* More padding */
+}
+
+.slide-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.text-header {
+  flex-shrink: 0;
+}
+
+.text-header h1 {
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.text-header p {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  text-indent: 0;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+.interactive-area {
+  flex-grow: 1; /* This makes the component take up the remaining vertical space */
+  width: 100%;
+  height: 100%;
+  min-height: 0; /* Critical for flexbox layout */
+}
 </style>
