@@ -38,6 +38,10 @@ npm run dev
 | Marcelo Angelo          | • Graphs and visualizations for recent and modern classification approaches<br>• Exploration of the dataset of new AI models<br>• Summarization of key articles |
 | All members             | • Styling<br>• Bug fixing<br>• Deployment<br>• Research<br>• UI/UX discussions and screen flow design                                     |
 
+## 🧠 Use of AI
+
+We used ChatGPT throughout the project for brainstorming ideas, organizing code structure, and refining CSS styles. The tool helped us accelerate development and maintain clarity in implementation, while all final code was reviewed and understood by the team.
+
 ## 🚧 Project Milestones
 
 [To be completed]
