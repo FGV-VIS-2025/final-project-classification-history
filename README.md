@@ -1,4 +1,4 @@
-# The Evolution of Classification
+# Classification History
 
 ## 👥 Members
 
@@ -8,7 +8,7 @@
 
 ## ✨ Overview
 
-[To be completed]
+Machine learning models, especially those for classification, are increasingly present in daily life, yet their conceptual complexity represents a barrier for non-experts. This paper presents the development of an interactive data visualization tool designed to demystify the fundamentals of classification for a lay audience. Using a visual narrative constructed with scrollytelling techniques, the tool guides the user from basic classification concepts, through the historical XOR problem and the rise of Artificial Neural Networks (ANN), to the revolution caused by Convolutional Neural Networks (CNN) in image classification. The approach culminates in an interactive interface that allows the user to draw digits and observe in real-time the classification process by a CNN, fostering experimentation. Additionally, the article discusses the evolutionary trajectory and the growing computational demand of artificial intelligence models, contextualizing the reader on the challenges and the future of the field.
 
 ## 📄 Article
 
@@ -40,8 +40,4 @@ npm run dev
 
 ## 🧠 Use of AI
 
-We used ChatGPT throughout the project for brainstorming ideas, organizing code structure, and refining CSS styles. The tool helped us accelerate development and maintain clarity in implementation, while all final code was reviewed and understood by the team.
-
-## 🚧 Project Milestones
-
-[To be completed]
+We used AI throughout the project for brainstorming ideas, organizing code structure, and refining CSS styles. The tool helped us accelerate development and maintain clarity in implementation, while all final code was reviewed and understood by the team.

@@ -560,18 +560,6 @@
   }
   
   /* === UPGRADED EXTRAORDINARY COVER PAGE === */
-  #cover-page {
-    display: flex; /* Ensures centering works */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #03001C; /* Deep dark blue */
-    padding: 2rem;
-    color: var(--color-text);
-    overflow: hidden;
-  }
-
   #constellation-canvas {
     position: absolute;
     top: 0;
@@ -767,16 +755,6 @@
     text-align: center;
     margin: 0;
     padding-bottom: 1rem;
-  }
-
-  .placeholder-a4 {
-    width: 100%;
-    max-width: 180px;
-    aspect-ratio: 210 / 297;
-    background-color: rgba(26, 26, 26, 0.5);
-    border: 2px dashed var(--color-primary);
-    border-radius: 5px;
-    margin: auto 0;
   }
 
   .a4 {
