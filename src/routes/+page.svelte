@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { loadData } from "$lib/data/loadData.js";
   import Scrolly from "svelte-scrolly";
+  import { base } from "$app/paths";
 
   // Slides
   import Mnist from "$lib/Mnist.svelte";
@@ -157,8 +158,8 @@
   <Slide id="cover-page">
     <canvas id="constellation-canvas"></canvas>
     <div class="cover-content">
-      <h1 class="cover-title">The Evolution of Classification</h1>
-      <p class="cover-subtitle">From logic to convolution networks</p>
+      <h1 class="cover-title">Classification History</h1>
+      <p class="cover-subtitle">From logic to convolution networks and beyond</p>
     </div>
     <div class="scroll-indicator">
       <span>Scroll to Begin</span>
@@ -400,20 +401,22 @@
         Check the source code on <a href="https://github.com/FGV-VIS-2025/final-project-classification-history">GitHub</a>.
       </p>
       <p>
-        References: <a href="https://epoch.ai/data/notable-ai-models">Notable Models</a>
+        References:
+          <a href="https://epoch.ai/data/notable-ai-models">Notable Models</a>,
+          <a href="https://poloclub.github.io/cnn-explainer">CNN Explaner - Polo Club</a>
       </p>
     </div>
     <div class="picture conclusion">
       <a href="/" class="media-link">
         <div class="media-container">
           <h2>Report</h2>
-          <div class="placeholder-a4"></div>
+          <img src={`${base}/images/report.png`} alt="report" class="a4">
         </div>
       </a>
       <a href="/" class="media-link">
         <div class="media-container">
           <h2>Poster</h2>
-          <div class="placeholder-a4"></div>
+          <img src={`${base}/images/poster.png`} alt="poster" class="a4">
         </div>
       </a>
       <a href="/" class="media-link teaser-link">
@@ -603,6 +606,7 @@
   font-size: 6rem;          /* a bit larger */
   font-weight: 800;
   margin: 0;
+  text-align: center;
 
   /* animated “data-stream” gradient in deep-blue tones */
   background: linear-gradient(
@@ -637,7 +641,7 @@
   
   .cover-subtitle {
     font-size: 1.5rem;
-    color: var(--color-text);
+    color: var(--color-bg-dark);
     text-indent: 0;
     text-align: center;
     max-width: 600px;
@@ -771,6 +775,14 @@
     aspect-ratio: 210 / 297;
     background-color: rgba(26, 26, 26, 0.5);
     border: 2px dashed var(--color-primary);
+    border-radius: 5px;
+    margin: auto 0;
+  }
+
+  .a4 {
+    width: 100%;
+    max-width: 180px;
+    aspect-ratio: 210 / 297;
     border-radius: 5px;
     margin: auto 0;
   }
