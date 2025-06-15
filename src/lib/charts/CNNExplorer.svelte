@@ -158,100 +158,85 @@
 </script>
 
 <div class="cnn-explorer-new">
-  <div class="cnn-visualization-pipeline-container">
-    <div class="cnn-visualization-pipeline">
-      <div class="pipeline-stage input-stage">
-        {#if inputPixels}
-          <ImagesCanvas
-            imageData={inputPixels}
-            width={28}
-            height={28}
-          />
-        {:else}
-          <p>Loading input...</p>
-        {/if}
+  <div class="pipeline-stage input-stage">
+    {#if inputPixels}
+      <div class="img">
+        <ImagesCanvas
+          imageData={inputPixels}
+          width={28}
+          height={28}
+        />
       </div>
+    {:else}
+      <p>Loading input...</p>
+    {/if}
+  </div>
 
-      {#each allLayerActivations as layerData}
-        <div
-          class="pipeline-stage layer-stage"
-          class:error-stage={layerData.error}
-        >
-          {#if layerData.activations && !layerData.error}
-            {#if layerData.activations.length > 0}
-              <div class="activation-maps-grid-new">
-                {#each layerData.activations as activation (activation.channelIndex)}
-                  <ImagesCanvas
-                    imageData={activation.pixels}
-                    width={activation.displaySize}
-                    height={activation.displaySize}
-                  />
-                {/each}
+  {#each allLayerActivations as layerData}
+    <div
+      class="pipeline-stage layer-stage"
+      class:error-stage={layerData.error}
+    >
+      {#if layerData.activations && !layerData.error}
+        {#if layerData.activations.length > 0}
+          <div class="activation-maps-grid-new">
+            {#each layerData.activations as activation (activation.channelIndex)}
+              <div class="img">
+                <ImagesCanvas
+                  imageData={activation.pixels}
+                  width={activation.displaySize}
+                  height={activation.displaySize}
+                />
               </div>
-            {:else if !layerData.error}
-              <p class="no-viz-placeholder">
-                No specific visualization (e.g., {layerData.layerType})
-              </p>
-            {/if}
-          {/if}
-        </div>
-      {/each}
-      <div class="pipeline-stage output-stage">
-        {#if probs}
-          <div class="output-chart-container">
-            <HorizontalBarChart data={probs} />
+            {/each}
           </div>
-        {:else}
-          <p>Loading predictions...</p>
+        {:else if !layerData.error}
+          <p class="no-viz-placeholder">
+            No specific visualization (e.g., {layerData.layerType})
+          </p>
         {/if}
-      </div>
+      {/if}
     </div>
+  {/each}
+  <div class="pipeline-stage output-stage">
+    {#if probs}
+      <div class="output-chart-container">
+        <HorizontalBarChart data={probs} />
+      </div>
+    {:else}
+      <p>Loading predictions...</p>
+    {/if}
   </div>
 </div>
 
 <style>
-  /* General container for the whole visualizer */
   .cnn-explorer-new {
-    background: #f9fafb; /* Light gray page background */
-    border-radius: 8px;
     padding: 20px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #374151; /* Default text color */
-    max-width: 100%;
-    overflow: hidden; /* Prevent page scrollbars if pipeline is too wide for viewport initially */
-  }
-
-  /* Container for the scrollable pipeline */
-  .cnn-visualization-pipeline-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    padding: 10px 0;
-    background-color: #ffffff; /* White background for the scrolling area */
-    border-radius: 6px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-  }
-
-  /* The pipeline itself (flex container) */
-  .cnn-visualization-pipeline {
+    width: 80%;
     display: flex;
-    align-items: stretch; /* Make stages of same height if possible */
-    gap: 5px;
-    min-width: fit-content; /* Ensure flex container is wide enough for all stages */
-    padding: 10px; /* Padding inside the scrollable area */
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
   }
 
-  /* Individual stage in the pipeline (input, layer, output) */
   .pipeline-stage {
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
-    padding: 15px;
-    min-width: 100px; /* Minimum width for a stage */
-    max-width: 380px; /* Maximum width */
+    padding: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column; /* Stack content vertically within a stage */
     gap: 12px; /* Space between elements inside a stage */
   }
+
+  .img {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+  }
+
   .pipeline-stage.error-stage {
     /* Style for layers that encountered an error */
     border-color: #f87171;
@@ -261,10 +246,7 @@
   /* Grid for displaying multiple activation maps */
   .activation-maps-grid-new {
     display: grid;
-    /* Auto-fill columns, each map item at least 52px wide */
-    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
-    gap: 8px;
-    margin-top: 10px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* Placeholder text if a layer has no specific visualization */
@@ -283,14 +265,12 @@
 
   /* Output stage specific styling */
   .output-stage {
-    min-width: 280px; /* Slightly wider for the prediction chart */
+    min-width: 200px; /* Slightly wider for the prediction chart */
   }
   
   .output-chart-container {
     /* Container for the PredictionChart component */
-    margin-top: 10px;
     width: 100%;
-    min-height: 150px; /* Ensure some height for the chart */
     display: flex; /* Helps in centering/sizing the chart if PredictionChart is a block */
     align-items: center;
     justify-content: center;

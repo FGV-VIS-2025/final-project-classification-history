@@ -47,4 +47,4 @@
     }
   </script>
   
-  <canvas bind:this={canvasElement} {width} {height} style="border: 1px solid #ccc; image-rendering: pixelated;"></canvas>
+  <canvas bind:this={canvasElement} {width} {height} style="border: 1px solid #ccc; image-rendering: pixelated; width: 100%;"></canvas>

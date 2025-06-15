@@ -399,6 +399,9 @@
       <p>
         Check the source code on <a href="https://github.com/FGV-VIS-2025/final-project-classification-history">GitHub</a>.
       </p>
+      <p>
+        References: <a href="https://epoch.ai/data/notable-ai-models">Notable Models</a>
+      </p>
     </div>
     <div class="picture conclusion">
       <a href="/" class="media-link">

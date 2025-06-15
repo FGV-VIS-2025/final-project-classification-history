@@ -1,7 +1,7 @@
 <script>
   import { fly } from 'svelte/transition';
   export let data = [];
-  
+
   // Find the index of the max probability
   $: maxIdx = data.length ? data.indexOf(Math.max(...data)) : -1;
   
