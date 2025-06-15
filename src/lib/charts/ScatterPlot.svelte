@@ -14,7 +14,7 @@
     const config = {
         width: 400,
         height: 300,
-        margin: { top: 20, right: 20, bottom: 20, left: 20 }
+        margin: { top: 0, right: 0, bottom: 0, left: 0 }
     };
     const colorMap = { '0': 'var(--color-orange)', '1': 'var(--color-blue)' };
 

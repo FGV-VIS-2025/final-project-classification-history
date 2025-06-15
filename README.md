@@ -1,4 +1,4 @@
-# The Evolution of Classification
+# Classification History
 
 ## 👥 Members
 
@@ -8,7 +8,7 @@
 
 ## ✨ Overview
 
-[To be completed]
+Machine learning models, especially those for classification, are increasingly present in daily life, yet their conceptual complexity represents a barrier for non-experts. This paper presents the development of an interactive data visualization tool designed to demystify the fundamentals of classification for a lay audience. Using a visual narrative constructed with scrollytelling techniques, the tool guides the user from basic classification concepts, through the historical XOR problem and the rise of Artificial Neural Networks (ANN), to the revolution caused by Convolutional Neural Networks (CNN) in image classification. The approach culminates in an interactive interface that allows the user to draw digits and observe in real-time the classification process by a CNN, fostering experimentation. Additionally, the article discusses the evolutionary trajectory and the growing computational demand of artificial intelligence models, contextualizing the reader on the challenges and the future of the field.
 
 ## 📄 Article
 
@@ -24,54 +24,20 @@
 
 ## ▶️ How to run locally
 
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-### Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-### Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-### Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 ## 🛠️ Task Distribution
 
-| Member                  | Responsibilities                                                                                      |
-|-------------------------|--------------------------------------------------------------------------------------------------------|
-| Esdras Cavalcanti       | • Project structure and architecture<br>• Mouse scroll interaction<br>• Drawer component              |
-| João Felipe Vilas Boas  | • Slide implementation related to CNNs using TensorFlowJS                                             |
-| Marcelo Angelo          | • Graphs and visualizations for recent and modern classification approaches                           |
-| All members             | • Styling<br>• Bug fixing<br>• Deployment<br>• Research<br>• UI/UX discussions and screen flow design |
+| Member                  | Responsibilities                                                                                                                          |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Esdras Cavalcanti       | • Project structure and architecture<br>• Mouse scroll interaction<br>• Drawer component                                                  |
+| João Felipe Vilas Boas  | • Slide implementation related to CNNs using TensorFlowJS<br>• Training of a TinyVGG using TensorFlow<br>• Visualization of internal layers using TensorFlowJS |
+| Marcelo Angelo          | • Graphs and visualizations for recent and modern classification approaches<br>• Exploration of the dataset of new AI models<br>• Summarization of key articles |
+| All members             | • Styling<br>• Bug fixing<br>• Deployment<br>• Research<br>• UI/UX discussions and screen flow design                                     |
 
-## 🚧 Project Milestones
+## 🧠 Use of AI
 
-[To be completed]
+We used AI throughout the project for brainstorming ideas, organizing code structure, and refining CSS styles. The tool helped us accelerate development and maintain clarity in implementation, while all final code was reviewed and understood by the team.

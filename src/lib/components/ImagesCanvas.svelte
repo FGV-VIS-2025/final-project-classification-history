@@ -12,25 +12,28 @@
     let canvasElement;
   
     function draw() {
-      if (!canvasElement || !imageData || imageData.length !== 784) return;
+      if (!canvasElement || !imageData || imageData.length / width / height !== 1) return;
   
       const ctx = canvasElement.getContext('2d');
       if (!ctx) return;
   
       const imageSide = 28;
-      const pixelSizeX = width / imageSide;
-      const pixelSizeY = height / imageSide;
   
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'black';
       ctx.fillRect(0,0, width, height);
   
-      for (let i = 0; i < imageSide; i++) {
-        for (let j = 0; j < imageSide; j++) {
-          const pixelValue = imageData[i * imageSide + j];
-          const grayscale = Math.floor(pixelValue * 255);
+      for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+          const pixelValue = imageData[i * height + j];
+          let grayscale;
+          if (pixelValue <= 1) {
+            grayscale = Math.floor(pixelValue * 255);
+          } else {
+            grayscale = Math.floor(pixelValue);
+          }
           ctx.fillStyle = `rgb(${grayscale}, ${grayscale}, ${grayscale})`;
-          ctx.fillRect(j * pixelSizeX, i * pixelSizeY, pixelSizeX, pixelSizeY);
+          ctx.fillRect(j, i, 1, 1);
         }
       }
     }
@@ -44,4 +47,4 @@
     }
   </script>
   
-  <canvas bind:this={canvasElement} {width} {height} style="border: 1px solid #ccc; image-rendering: pixelated;"></canvas>
+  <canvas bind:this={canvasElement} {width} {height} style="border: 1px solid #ccc; image-rendering: pixelated; width: 100%;"></canvas>
