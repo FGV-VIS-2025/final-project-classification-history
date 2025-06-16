@@ -407,13 +407,13 @@
       </p>
     </div>
     <div class="picture conclusion">
-      <a href="/" class="media-link">
+      <a href="https://github.com/FGV-VIS-2025/final-project-classification-history/blob/main/FinalPaper.pdf" class="media-link">
         <div class="media-container">
           <h2>Report</h2>
           <img src={`${base}/images/report.png`} alt="report" class="a4">
         </div>
       </a>
-      <a href="/" class="media-link">
+      <a href="https://github.com/FGV-VIS-2025/final-project-classification-history/blob/main/Poster.pdf" class="media-link">
         <div class="media-container">
           <h2>Poster</h2>
           <img src={`${base}/images/poster.png`} alt="poster" class="a4">
@@ -424,7 +424,7 @@
           <h2>Teaser</h2>
           <iframe
             title="Teaser Video"
-            src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
+            src="https://drive.google.com/file/d/1Vig2IxanrnLzfgDuepCV9Su7HoYxkwlx/preview"
             allow="autoplay"
           ></iframe>
         </div>
@@ -434,7 +434,7 @@
           <h2>Presentation</h2>
           <iframe
             title="Presentation Video"
-            src="https://drive.google.com/file/d/13omNpGAdnBc2P0SK9eytZbT_eGwVbN2J/preview"
+            src="https://drive.google.com/file/d/11S7zlnvuI3dJ5O1BCq0ezB0az7mAJ6AX/preview"
             allow="autoplay"
           ></iframe>
         </div>
