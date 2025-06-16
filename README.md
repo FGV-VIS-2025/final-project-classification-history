@@ -10,17 +10,11 @@
 
 Machine learning models, especially those for classification, are increasingly present in daily life, yet their conceptual complexity represents a barrier for non-experts. This paper presents the development of an interactive data visualization tool designed to demystify the fundamentals of classification for a lay audience. Using a visual narrative constructed with scrollytelling techniques, the tool guides the user from basic classification concepts, through the historical XOR problem and the rise of Artificial Neural Networks (ANN), to the revolution caused by Convolutional Neural Networks (CNN) in image classification. The approach culminates in an interactive interface that allows the user to draw digits and observe in real-time the classification process by a CNN, fostering experimentation. Additionally, the article discusses the evolutionary trajectory and the growing computational demand of artificial intelligence models, contextualizing the reader on the challenges and the future of the field.
 
-## 📄 Article
+## [📄 Article](https://github.com/FGV-VIS-2025/final-project-classification-history/blob/main/FinalPaper.pdf)
 
-[To be completed]
+## [🎞️ Teaser](https://drive.google.com/file/d/1Vig2IxanrnLzfgDuepCV9Su7HoYxkwlx/view)
 
-## 🎞️ Teaser
-
-[To be completed]
-
-## 🧑‍🏫 Presentation
-
-[To be completed]
+## [🧑‍🏫 Presentation](https://drive.google.com/file/d/11S7zlnvuI3dJ5O1BCq0ezB0az7mAJ6AX/view)
 
 ## ▶️ How to run locally
 
